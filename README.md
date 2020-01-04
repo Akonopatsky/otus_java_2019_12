@@ -3,5 +3,5 @@
 Группа 2019-12
 
 ### Студент
-Алексей Конопацкий<br>
+Aleksei Konopatskii (Алексей Конопацкий)<br>
 Akonopatsky@gmail.com
