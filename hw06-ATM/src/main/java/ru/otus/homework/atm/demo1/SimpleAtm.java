@@ -1,25 +1,23 @@
 package ru.otus.homework.atm.demo1;
 import ru.otus.homework.atm.Atm;
 import ru.otus.homework.atm.Banknote;
-import ru.otus.homework.atm.BanknotesKeeper;
+import ru.otus.homework.atm.AtmCell;
 import ru.otus.homework.atm.UnsupportedBanknoteException;
 
 import java.util.*;
-
 public class SimpleAtm implements Atm {
-    private ArrayList<BanknotesKeeper> cells;
-
+    private ArrayList<AtmCell> cells;
     @Override
-    public boolean getPack(long amount, List<Banknote> pack) {
-        if(!checkAmount(amount)) return false;
+    public boolean getMoney(long amount, List<Banknote> pack) {
+        if(!haveEnoughBanknotes(amount)) return false;
         long ost = amount;
         int i = cells.size()-1;
-        BanknotesKeeper currentCell;
+        AtmCell currentCell;
         while (i>=0) {
             if (ost == 0) return true;
             currentCell = cells.get(i);
             if (currentCell.getQuantity()>0 && ost >= currentCell.getKeeperNominal()) {
-                pack.add(currentCell.getOneBanknote());
+                pack.add(currentCell.getOutOneBanknote());
                 ost-=currentCell.getKeeperNominal();
             }
             else {
@@ -28,8 +26,7 @@ public class SimpleAtm implements Atm {
         }
         return false;
     }
-    private boolean checkAmount(long amount) {
-
+    private boolean haveEnoughBanknotes(long amount) {
         long ost = amount;
         int[] tempCells = new int[cells.size()];
         for (int i = 0; i < cells.size(); i++) {
@@ -50,19 +47,17 @@ public class SimpleAtm implements Atm {
         }
         return false;
     }
-
     @Override
     public void putPack(List<Banknote> pack) throws UnsupportedBanknoteException {
         for (Banknote banknote : pack) {
-            putBanknoteIn(banknote);
+                putBanknoteIn(banknote);
         }
-
     }
     private void putBanknoteIn(Banknote banknote) throws UnsupportedBanknoteException {
         for (int i = 0; i < cells.size() ; i++) {
-            BanknotesKeeper cell = cells.get(i);
+            AtmCell cell = cells.get(i);
             if (banknote.getBanknoteType().equals(cell.getBanknoteType())) {
-                cell.put(banknote);
+                cell.putInOneBanknote(banknote);
                 return;
             }
         }
@@ -71,18 +66,24 @@ public class SimpleAtm implements Atm {
     @Override
     public long getAmount() {
         long amount = 0;
-        for (BanknotesKeeper cell : cells) {
+        for (AtmCell cell : cells) {
             amount+=cell.getKeeperNominal()*cell.getQuantity();
         }
         return amount;
     }
+
+    @Override
+    public void removeAllCells() {
+        this.cells.clear();
+    }
+
     public SimpleAtm() {
         this.cells = new ArrayList<>();
 
     }
-    public void addCell(BanknotesKeeper cell) {
+    public void addCell(AtmCell cell) {
         cells.add(cell);
-        cells.sort(Comparator.comparing(BanknotesKeeper::getKeeperNominal));
+        cells.sort(Comparator.comparing(AtmCell::getKeeperNominal));
     }
     public void clearCells() {
         cells.clear();
