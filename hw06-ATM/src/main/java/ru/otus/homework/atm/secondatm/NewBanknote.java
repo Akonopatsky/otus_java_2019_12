@@ -1,6 +1,6 @@
-package ru.otus.homework.atm.demo2;
+package ru.otus.homework.atm.secondatm;
 
-import ru.otus.homework.atm.demo1.SimpleBanknote;
+import ru.otus.homework.atm.firstatm.SimpleBanknote;
 
 public class NewBanknote extends SimpleBanknote {
     final private int currencyCode;

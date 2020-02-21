@@ -1,4 +1,4 @@
-package ru.otus.homework.atm.demo1;
+package ru.otus.homework.atm.firstatm;
 
 import ru.otus.homework.atm.Banknote;
 import ru.otus.homework.atm.BanknoteType;
@@ -21,8 +21,7 @@ public class SimpleCell implements AtmCell {
 
     @Override
     public boolean canPutInBanknote(Banknote banknote) {
-        if (this.getBanknoteType().equals(banknote.getBanknoteType())) return true;
-        return false;
+        return getBanknoteType().equals(banknote.getBanknoteType());
     }
     @Override
     public boolean putInOneBanknote(Banknote banknote) {
@@ -34,7 +33,7 @@ public class SimpleCell implements AtmCell {
         return false;
     }
     @Override
-    public long getKeeperNominal() {
+    public long getCellNominal() {
         return this.getBanknoteType().getNominal();
     }
     @Override

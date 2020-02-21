@@ -4,7 +4,7 @@ public interface AtmCell {
     boolean canPutInBanknote(Banknote banknote);
     boolean putInOneBanknote(Banknote banknote);
     Banknote getOutOneBanknote();
-    long getKeeperNominal();
+    long getCellNominal();
     int getQuantity();
     BanknoteType getBanknoteType();
 }

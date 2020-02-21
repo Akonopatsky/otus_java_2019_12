@@ -1,4 +1,4 @@
-package ru.otus.homework.atm.demo1;
+package ru.otus.homework.atm.firstatm;
 
 import ru.otus.homework.atm.Banknote;
 import ru.otus.homework.atm.BanknoteType;
