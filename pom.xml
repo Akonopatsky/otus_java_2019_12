@@ -33,7 +33,7 @@
         </developer>
     </developers>
     <properties>
-        <com.google.guava.version>28.1-jre</com.google.guava.version>
+        <com.google.guava.version>29.0-jre</com.google.guava.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
